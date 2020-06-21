@@ -6,6 +6,7 @@
 
 import numpy as np
 import pandas as pd
+import pickle
 from sklearn.preprocessing import StandardScaler
 from sklearn.base import BaseEstimator,TransformerMixin
 
@@ -69,7 +70,7 @@ class absenteeism_model():
     def load_and_clean_data(self, data_file):
         
         #import the data
-        df = pd.read_csv(data_file, delimeter=',')
+        df = pd.read_csv(data_file, delimiter=',')
         
         #store the data in a new variable for the later use
         self.df_with_predictions = df.copy()
@@ -99,13 +100,13 @@ class absenteeism_model():
         # note: there is a more universal version of this code, however the following will best suit our current purposes             
         column_names = ['Date', 'Transportation Expense', 'Distance to Work', 'Age',
                         'Daily Work Load Average', 'Body Mass Index', 'Education', 'Children',
-                        'Pet', 'Absenteeism Time in Hours', 'Reason_1', 'Reason_2', 'Reason_3', 'Reason_4']
+                        'Pets', 'Absenteeism Time in Hours', 'Reason_1', 'Reason_2', 'Reason_3', 'Reason_4']
         df.columns = column_names
 
         # re-order the columns in df
         column_names_reordered = ['Reason_1', 'Reason_2', 'Reason_3', 'Reason_4', 'Date', 'Transportation Expense', 
                                   'Distance to Work', 'Age', 'Daily Work Load Average', 'Body Mass Index', 'Education', 
-                                  'Children', 'Pet', 'Absenteeism Time in Hours']
+                                  'Children', 'Pets', 'Absenteeism Time in Hours']
         df = df[column_names_reordered]
       
         # convert the 'Date' column into datetime
@@ -129,7 +130,7 @@ class absenteeism_model():
         column_names_upd = ['Reason_1', 'Reason_2', 'Reason_3', 'Reason_4', 'Month Value', 'Day of the Week',
                                 'Transportation Expense', 'Distance to Work', 'Age',
                                 'Daily Work Load Average', 'Body Mass Index', 'Education', 'Children',
-                                'Pet', 'Absenteeism Time in Hours']
+                                'Pets', 'Absenteeism Time in Hours']
         df = df[column_names_upd]
 
 
